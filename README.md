@@ -5,11 +5,11 @@
 | Field | Value |
 |-------|--------|
 | Public ENI page | https://eni.calhegasmorais.pt/ |
-| Node | [Calhegas Morais Node](https://github.com/amcmorais/calhegas-morais-node) (`FOG-NODE-PT-CM-001`) |
-| Laboratory | [StrataMesh Laboratory](https://github.com/amcmorais/stratamesh-laboratory) |
-| Core | [stratamesh-core](https://github.com/amcmorais/stratamesh-core) |
+| Laboratory org | [StrataMesh-Laboratory](https://github.com/StrataMesh-Laboratory) |
+| Node | [calhegas-morais-node](https://github.com/StrataMesh-Laboratory/calhegas-morais-node) (`FOG-NODE-PT-CM-001`) |
+| Core | [stratamesh-core](https://github.com/StrataMesh-Laboratory/stratamesh-core) |
 | Site | https://calhegasmorais.pt/ |
 
 ## Scope
 
-Registry for identity of the operator entity relative to the Fog Node and the laboratory. Protocol code lives in **stratamesh-core**; node surface in **calhegas-morais-node**.
+Registry for the operator entity relative to the Fog Node and the laboratory. Protocol code lives under **StrataMesh-Laboratory**.
