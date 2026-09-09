@@ -1,0 +1,529 @@
+{
+  "generated_at": "2026-09-09T23:33:18.367391+00:00",
+  "definition": {
+    "equation": "100 \u20acAu = 1 troy oz Au 999.9",
+    "version": "1.0.0-philharmoniker",
+    "formula": "X_au = X_eur * (100 / P_au_eur)"
+  },
+  "gold": [
+    {
+      "observation_date": "2000-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 310.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2001-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 330.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2002-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 350.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2003-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 320.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2004-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 330.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2005-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 360.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2006-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 480.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2007-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 510.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2008-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 600.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2009-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 700.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2010-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 950.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2011-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1200.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2012-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1300.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2013-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1100.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2014-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1000.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2015-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1050.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2016-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1120.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2017-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1150.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2018-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1100.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2019-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1250.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2020-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1550.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2021-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1550.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2022-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1700.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2023-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 1800.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2024-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 2150.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2025-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 2600.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    },
+    {
+      "observation_date": "2026-12-31",
+      "frequency": "A",
+      "price_eur_per_troy_oz": 3776.0,
+      "methodology": "seed_annual_close_lab",
+      "source": "seed"
+    }
+  ],
+  "datasets": [
+    {
+      "id": "nama_10_gdp",
+      "source_id": "eurostat",
+      "title": "GDP and main components",
+      "frequency": "A"
+    }
+  ],
+  "observations": {
+    "nama_10_gdp": [
+      {
+        "period": "2000",
+        "source_value": 7060575.2,
+        "source_unit": "million EUR",
+        "gold_price": 310.0,
+        "gold_price_date_or_period": "2000-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 2277604.9032258065,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2001",
+        "source_value": 7394454.9,
+        "source_unit": "million EUR",
+        "gold_price": 330.0,
+        "gold_price_date_or_period": "2001-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 2240743.909090909,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2002",
+        "source_value": 7648498.4,
+        "source_unit": "million EUR",
+        "gold_price": 350.0,
+        "gold_price_date_or_period": "2002-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 2185285.257142857,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2003",
+        "source_value": 7875580.5,
+        "source_unit": "million EUR",
+        "gold_price": 320.0,
+        "gold_price_date_or_period": "2003-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 2461118.90625,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2004",
+        "source_value": 8213808.3,
+        "source_unit": "million EUR",
+        "gold_price": 330.0,
+        "gold_price_date_or_period": "2004-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 2489032.8181818184,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2005",
+        "source_value": 8519652.0,
+        "source_unit": "million EUR",
+        "gold_price": 360.0,
+        "gold_price_date_or_period": "2005-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 2366570.0,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2006",
+        "source_value": 8981131.0,
+        "source_unit": "million EUR",
+        "gold_price": 480.0,
+        "gold_price_date_or_period": "2006-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 1871068.9583333333,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2007",
+        "source_value": 9480475.9,
+        "source_unit": "million EUR",
+        "gold_price": 510.0,
+        "gold_price_date_or_period": "2007-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 1858916.843137255,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2008",
+        "source_value": 9719842.0,
+        "source_unit": "million EUR",
+        "gold_price": 600.0,
+        "gold_price_date_or_period": "2008-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 1619973.6666666667,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2009",
+        "source_value": 9381244.1,
+        "source_unit": "million EUR",
+        "gold_price": 700.0,
+        "gold_price_date_or_period": "2009-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 1340177.7285714287,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2010",
+        "source_value": 9644953.1,
+        "source_unit": "million EUR",
+        "gold_price": 950.0,
+        "gold_price_date_or_period": "2010-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 1015258.2210526316,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2011",
+        "source_value": 9920996.5,
+        "source_unit": "million EUR",
+        "gold_price": 1200.0,
+        "gold_price_date_or_period": "2011-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 826749.7083333334,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2012",
+        "source_value": 9952548.3,
+        "source_unit": "million EUR",
+        "gold_price": 1300.0,
+        "gold_price_date_or_period": "2012-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 765580.6384615385,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2013",
+        "source_value": 10059885.1,
+        "source_unit": "million EUR",
+        "gold_price": 1100.0,
+        "gold_price_date_or_period": "2013-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 914535.009090909,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2014",
+        "source_value": 10302135.4,
+        "source_unit": "million EUR",
+        "gold_price": 1000.0,
+        "gold_price_date_or_period": "2014-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 1030213.54,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2015",
+        "source_value": 10668712.3,
+        "source_unit": "million EUR",
+        "gold_price": 1050.0,
+        "gold_price_date_or_period": "2015-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 1016067.8380952381,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2016",
+        "source_value": 10961974.3,
+        "source_unit": "million EUR",
+        "gold_price": 1120.0,
+        "gold_price_date_or_period": "2016-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 978747.7053571428,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2017",
+        "source_value": 11380862.0,
+        "source_unit": "million EUR",
+        "gold_price": 1150.0,
+        "gold_price_date_or_period": "2017-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 989640.1739130435,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2018",
+        "source_value": 11763413.5,
+        "source_unit": "million EUR",
+        "gold_price": 1100.0,
+        "gold_price_date_or_period": "2018-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 1069401.2272727273,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2019",
+        "source_value": 12160472.5,
+        "source_unit": "million EUR",
+        "gold_price": 1250.0,
+        "gold_price_date_or_period": "2019-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 972837.8,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2020",
+        "source_value": 11641724.6,
+        "source_unit": "million EUR",
+        "gold_price": 1550.0,
+        "gold_price_date_or_period": "2020-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 751079.0064516129,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2021",
+        "source_value": 12649486.8,
+        "source_unit": "million EUR",
+        "gold_price": 1550.0,
+        "gold_price_date_or_period": "2021-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 816095.9225806452,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2022",
+        "source_value": 13782280.2,
+        "source_unit": "million EUR",
+        "gold_price": 1700.0,
+        "gold_price_date_or_period": "2022-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 810722.3647058824,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2023",
+        "source_value": 14702286.8,
+        "source_unit": "million EUR",
+        "gold_price": 1800.0,
+        "gold_price_date_or_period": "2023-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 816793.7111111111,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2024",
+        "source_value": 15299554.9,
+        "source_unit": "million EUR",
+        "gold_price": 2150.0,
+        "gold_price_date_or_period": "2024-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 711607.2046511628,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      },
+      {
+        "period": "2025",
+        "source_value": 15852835.5,
+        "source_unit": "million EUR",
+        "gold_price": 2600.0,
+        "gold_price_date_or_period": "2025-12-31",
+        "gold_alignment_method": "annual_average",
+        "au_value": 609724.4423076923,
+        "au_unit": "million \u20acAu",
+        "transformation_version": "1.0.0",
+        "au_definition_version": "1.0.0-philharmoniker"
+      }
+    ]
+  },
+  "status": {
+    "gold_rows": 27,
+    "source_observations": 26,
+    "au_observations": 26,
+    "last_run": "ok"
+  }
+}
