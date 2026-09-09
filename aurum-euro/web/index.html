@@ -2,40 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Aurum Euro — public data repository</title>
-  <link rel="stylesheet" href="/static/styles.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Aurum Euro Repository</title>
+  <meta name="description" content="Public repository of European statistical observations preserved in their original unit and expressed in Aurum Euro."/>
+  <link rel="stylesheet" href="/aurum-euro/static/styles.css"/>
+  <script type="application/ld+json" id="jsonld"></script>
 </head>
 <body>
 <header>
-  <strong>€Au</strong>
+  <div class="mark">Aurum Euro · €Au</div>
   <nav>
-    <a href="/">Data</a>
-    <a href="#explore">Explore</a>
-    <a href="#download">Download</a>
-    <a href="/static/methodology.html">Methodology</a>
-    <a href="/static/provenance.html">Provenance</a>
-    <a href="/static/about.html">About</a>
+    <a href="/aurum-euro">Repository</a>
+    <a href="/aurum-euro/static/methodology.html">Method</a>
+    <a href="/aurum-euro/static/provenance.html">Provenance</a>
+    <a href="/aurum-euro/api/v1/health">Machine interface</a>
   </nav>
 </header>
 <main>
-  <h1>Aurum Euro public data repository</h1>
-  <p class="mut">Original Eurostat / STOXX observations preserved. Historically aligned €Au equivalents. 100 €Au = 1 troy oz Au 999.9. The engine does not assert growth or welfare.</p>
-  <div class="health" id="health"></div>
-  <h2>Browser</h2>
-  <p>
-    Dataset <select id="ds"></select>
-    Output
-    <select id="unit"><option>both</option><option>EUR</option><option>au</option></select>
-    <button id="go">Load</button>
-    <a id="csv" href="#">CSV</a>
-    <a id="json" href="#">JSON</a>
-  </p>
-  <table>
-    <thead><tr><th>Period</th><th>Source</th><th>Unit</th><th>Gold €/oz</th><th>Alignment</th><th>€Au</th><th>€Au unit</th></tr></thead>
-    <tbody id="tb"><tr><td colspan="7" class="mut">Load a dataset.</td></tr></tbody>
-  </table>
+  <h1>A public repository of European accounts in Aurum Euro</h1>
+  <p class="lead">Each figure is kept as published by the statistical authority. A second figure is computed in Aurum Euro from the fixed metallic definition and the gold price of the same period. The repository does not interpret growth, inflation, or welfare.</p>
+  <div class="stats" id="stats"></div>
+  <p class="notice" id="notice"></p>
+  <div class="filters">
+    <div><label for="geo">Territory</label><select id="geo"></select></div>
+    <div><label for="ind">Account</label><select id="ind"></select></div>
+    <div><label for="ds">Collection</label><select id="ds"></select></div>
+  </div>
+  <p class="machine" id="series-id"></p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Reference period</th>
+          <th>Original observation</th>
+          <th>Original unit</th>
+          <th>Gold, euro per troy ounce</th>
+          <th>Alignment of the gold price</th>
+          <th>Observation in Aurum Euro</th>
+          <th>Unit in Aurum Euro</th>
+        </tr>
+      </thead>
+      <tbody id="tb"></tbody>
+    </table>
+  </div>
+  <footer>
+    <p>Definition: one hundred Aurum Euro equal one troy ounce of gold of fineness 999.9. Formula: the original euro observation multiplied by one hundred and divided by the euro price of one troy ounce in the aligned period.</p>
+    <p>Downloads for the selected series:
+      <a id="csv" href="#">comma-separated values</a> ·
+      <a id="json" href="#">JSON</a> ·
+      <a href="/aurum-euro/snapshot.json">complete snapshot</a>
+    </p>
+  </footer>
 </main>
-<script src="/static/app.js"></script>
+<script src="/aurum-euro/static/app.js"></script>
 </body>
 </html>

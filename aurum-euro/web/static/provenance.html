@@ -1,9 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"/><title>Provenance · €Au</title>
-<link rel="stylesheet" href="/static/styles.css"/></head><body>
-<header><a href="/">← repository</a></header>
-<main>
-<h1>Provenance</h1>
-<p>Every €Au row stores source, dataset version, original value/unit, gold observation and alignment, formula version, timestamps.</p>
-<p>GET <code>/api/v1/observations/{id}</code> returns the reconstructable record.</p>
-<p>Raw Eurostat payloads: <code>data/raw/eurostat/{dataset}/{stamp}.json</code>.</p>
-</main></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><title>Provenance · Aurum Euro</title>
+<link rel="stylesheet" href="/aurum-euro/static/styles.css"/></head><body>
+<header><div class="mark">Aurum Euro</div><nav><a href="/aurum-euro">Repository</a></nav></header>
+<main><h1>Provenance</h1><p>Every derived observation retains the source authority, the collection, the territory, the account, the reference period, the original value and unit, the gold price employed, the rule by which that price was chosen, the version of the definition, and the version of the formula.</p><p>The complete snapshot is published at <a href="/aurum-euro/snapshot.json">/aurum-euro/snapshot.json</a>. The health of the repository is published at <a href="/aurum-euro/api/v1/health">/aurum-euro/api/v1/health</a>.</p></main></body></html>
