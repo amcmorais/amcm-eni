@@ -1,53 +1,86 @@
-"""Eurostat SDMX-JSON connector. Registry-driven — do not freeze today's catalogue."""
+"""Eurostat official SDMX 2.1 TSV + Statistics JSON. No webpage scrape."""
 from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from .base import SourceConnector
 
-BASE = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
-REGISTRY = Path(__file__).resolve().parents[2] / "data" / "seed" / "eurostat_registry.json"
+SDMX = "https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/"
+STAT = "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/"
+REG = Path(__file__).resolve().parents[2] / "data" / "seed" / "phase2_registry.json"
+
+
+def _get(url: str) -> bytes:
+    req = Request(url, headers={"User-Agent": "aurum-euro-repo/2.0 (+eni.calhegasmorais.pt/aurum-euro)"})
+    with urlopen(req, timeout=90) as r:
+        return r.read()
+
+
+def parse_tsv(text: str) -> list[dict]:
+    lines = [ln for ln in text.splitlines() if ln.strip()]
+    if not lines:
+        return []
+    header = lines[0]
+    left, times = header.split("\\TIME_PERIOD", 1)
+    dim_names = [x.strip() for x in left.split(",")]
+    periods = [p.strip() for p in times.split("\t") if p.strip() or True]
+    # times string starts with tab-separated years; first token may be empty
+    period_labels = [p.strip() for p in times.split("\t")]
+    if period_labels and period_labels[0] == "":
+        period_labels = period_labels[1:]
+    rows = []
+    for ln in lines[1:]:
+        parts = ln.split("\t")
+        keys = parts[0].split(",")
+        vals = parts[1:]
+        dims = dict(zip(dim_names, keys))
+        for per, raw in zip(period_labels, vals):
+            raw = (raw or "").strip()
+            if raw in ("", ":", ": ", ":z", ":u", ":c"):
+                continue
+            flag = ""
+            token = raw.split()[0] if raw else ""
+            try:
+                value = float(token.replace(",", ""))
+            except ValueError:
+                continue
+            rows.append({
+                "dims": dims,
+                "period": per.strip(),
+                "value": value,
+                "flag": flag,
+            })
+    return rows
 
 
 class EurostatConnector(SourceConnector):
     name = "eurostat"
 
     def discover(self) -> list[dict]:
-        if REGISTRY.is_file():
-            return json.loads(REGISTRY.read_text(encoding="utf-8")).get("datasets") or []
-        return [{"id": "nama_10_gdp", "title": "GDP and main components"}]
+        if REG.is_file():
+            return json.loads(REG.read_text(encoding="utf-8")).get("series") or []
+        return []
 
-    def fetch(self, dataset_id: str, **params) -> dict:
-        q = {"format": "JSON", **params}
-        url = BASE + dataset_id + "?" + urlencode(q)
-        req = Request(url, headers={"User-Agent": "aurum-euro-repo/1.0"})
-        with urlopen(req, timeout=60) as r:
-            raw = r.read()
-        dest = Path(__file__).resolve().parents[2] / "data" / "raw" / "eurostat" / dataset_id
+    def fetch_series(self, dataset: str, key: str) -> dict:
+        url = f"{SDMX}{dataset}/{key}?format=TSV&compressed=false"
+        raw = _get(url)
+        dest = Path(__file__).resolve().parents[2] / "data" / "raw" / "eurostat" / dataset
         dest.mkdir(parents=True, exist_ok=True)
         stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        (dest / f"{stamp}.json").write_bytes(raw)
-        payload = json.loads(raw.decode("utf-8"))
-        payload["_retrieved_at"] = datetime.now(timezone.utc).isoformat()
-        payload["_url"] = url
-        return payload
+        (dest / f"{key.replace('.','_')}_{stamp}.tsv").write_bytes(raw)
+        text = raw.decode("utf-8", "replace")
+        return {
+            "dataset": dataset,
+            "key": key,
+            "url": url,
+            "retrieved_at": datetime.now(timezone.utc).isoformat(),
+            "observations": parse_tsv(text),
+        }
 
-    def normalize(self, payload: dict) -> list[dict]:
-        # SDMX-JSON 2.0 style used by Eurostat dissemination API
-        value = payload.get("value") or {}
-        dim = payload.get("dimension") or payload.get("id") or {}
-        # Keep raw + a flattened view when possible
-        rows = []
-        if isinstance(value, dict):
-            for k, v in list(value.items())[:5000]:
-                if v is None:
-                    continue
-                rows.append({
-                    "key": k,
-                    "value": v,
-                    "unit": "source",
-                    "reference_period": str(k),
-                })
-        return rows
+    def fetch(self, dataset_id: str, **params) -> dict:
+        # legacy JSON path
+        from urllib.parse import urlencode
+        url = STAT + dataset_id + "?" + urlencode({"format": "JSON", **params})
+        raw = _get(url)
+        return json.loads(raw.decode("utf-8"))

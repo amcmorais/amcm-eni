@@ -190,5 +190,100 @@ def rebuild(db: Path | None = None) -> dict:
     init_db(con)
     g = ingest_gold(con)
     e = ingest_nama_gdp(con)
+    p2 = ingest_phase2(con)
     con.close()
-    return {"gold_rows": g, "eurostat": e}
+    return {"gold_rows": g, "eurostat": e, "phase2": p2}
+
+
+def ingest_phase2(con, geos=None) -> dict:
+    from .connectors.eurostat import EurostatConnector, REG
+    import json as _json
+    spec = _json.loads(REG.read_text(encoding="utf-8"))
+    geos = geos or spec.get("geos") or ["EA20"]
+    conn = EurostatConnector()
+    run = _run_id()
+    con.execute("INSERT INTO ingestion_runs(run_id,source,started_at,status) VALUES (?,?,?,?)",
+                (run, "eurostat-phase2", NOW(), "running"))
+    con.commit()
+    added = 0
+    failed = []
+    ingest_gold(con)
+    for series in spec.get("series") or []:
+        for geo in geos:
+            key = series["key"].format(geo=geo)
+            try:
+                payload = conn.fetch_series(series["dataset"], key)
+            except Exception as e:
+                failed.append({"dataset": series["dataset"], "key": key, "err": str(e)[:80]})
+                continue
+            ds = series["dataset"]
+            unit = series.get("unit") or "source"
+            indicator = series.get("indicator") or key
+            freq = series.get("freq") or "A"
+            kind = series.get("kind") or "flow"
+            con.execute("INSERT OR IGNORE INTO datasets(id,source_id,code,title,frequency) VALUES (?,?,?,?,?)",
+                        (ds, "eurostat", ds, series.get("title") or ds, freq))
+            con.execute("INSERT INTO dataset_versions(dataset_id, version, retrieved_at, is_current) VALUES (?,?,?,1)",
+                        (ds, payload.get("retrieved_at") or NOW(), payload.get("retrieved_at") or NOW()))
+            ver_id = con.execute("SELECT last_insert_rowid()").fetchone()[0]
+            con.execute("INSERT OR IGNORE INTO entities(id,kind,code,name) VALUES (?,?,?,?)",
+                        (f"geo:{geo}", "geo", geo, geo))
+            con.execute("INSERT OR IGNORE INTO indicators(id,code,name,default_unit) VALUES (?,?,?,?)",
+                        (indicator, indicator, series.get("title") or indicator, unit))
+            for obs in payload.get("observations") or []:
+                period = str(obs.get("period") or "")[:16]
+                val = obs.get("value")
+                if val is None or not period:
+                    continue
+                con.execute(
+                    """INSERT OR IGNORE INTO observations_raw
+                       (dataset_version_id, entity_id, indicator_id, reference_period, frequency, value, unit, retrieved_at)
+                       VALUES (?,?,?,?,?,?,?,?)""",
+                    (ver_id, f"geo:{geo}", indicator, period, freq, float(val), unit, payload["retrieved_at"]),
+                )
+                raw_id = con.execute("SELECT last_insert_rowid()").fetchone()[0]
+                if not raw_id:
+                    row = con.execute(
+                        "SELECT id FROM observations_raw WHERE dataset_version_id=? AND entity_id=? AND indicator_id=? AND reference_period=?",
+                        (ver_id, f"geo:{geo}", indicator, period),
+                    ).fetchone()
+                    raw_id = row[0] if row else None
+                if not raw_id:
+                    continue
+                dim = parse_unit(unit)
+                con.execute(
+                    """INSERT OR IGNORE INTO observations_normalized
+                       (raw_id, value, unit, unit_dim, frequency, reference_period, period_kind)
+                       VALUES (?,?,?,?,?,?,?)""",
+                    (raw_id, float(val), unit, dim.scale, freq, period, kind),
+                )
+                nid_row = con.execute("SELECT last_insert_rowid()").fetchone()
+                nid = nid_row[0] if nid_row else 0
+                if not nid:
+                    rr = con.execute("SELECT id FROM observations_normalized WHERE raw_id=?", (raw_id,)).fetchone()
+                    nid = rr[0] if rr else None
+                if not nid:
+                    continue
+                if not needs_transform(dim):
+                    continue
+                g = gold_for_period(con, period, "A" if freq != "D" else "D")
+                if not g:
+                    continue
+                price, gdate, _ = g
+                align = "annual_average" if freq == "A" else ("quarterly_average" if freq == "Q" else "period_end" if kind=="stock" else "monthly_average")
+                au = transform_value(val, price, dim)
+                con.execute(
+                    """INSERT OR REPLACE INTO au_observations
+                       (normalized_id, derived_value, derived_unit, gold_price, gold_price_date_or_period,
+                        gold_alignment_method, gold_source, au_definition_version, transformation_formula,
+                        transformation_version, generated_at)
+                       VALUES (?,?,?,?,?,?,?,?,?,?,?)""",
+                    (nid, float(au), output_unit(dim), price, gdate, align, "seed",
+                     AU_DEFINITION_VERSION, TRANSFORMATION_FORMULA, TRANSFORMATION_VERSION, NOW()),
+                )
+                added += 1
+            con.commit()
+    con.execute("UPDATE ingestion_runs SET finished_at=?, status=?, observations_added=? WHERE run_id=?",
+                (NOW(), "ok" if added else "partial", added, run))
+    con.commit()
+    return {"ok": True, "run_id": run, "added": added, "failed": failed[:20], "failed_n": len(failed)}

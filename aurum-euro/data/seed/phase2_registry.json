@@ -1,0 +1,107 @@
+{
+  "note": "Official Eurostat SDMX 2.1 keys. Full history, filtered series \u2014 not webpage scrape.",
+  "geos": [
+    "EA20",
+    "EU27_2020",
+    "DE",
+    "FR",
+    "IT",
+    "ES",
+    "PT",
+    "NL",
+    "AT",
+    "BE"
+  ],
+  "series": [
+    {
+      "dataset": "nama_10_gdp",
+      "key": "A.CP_MEUR.B1GQ.{geo}",
+      "unit": "million EUR",
+      "indicator": "B1GQ",
+      "freq": "A",
+      "kind": "flow",
+      "title": "GDP current prices"
+    },
+    {
+      "dataset": "nama_10_gdp",
+      "key": "A.CP_MEUR.P31_S14.{geo}",
+      "unit": "million EUR",
+      "indicator": "P31_S14",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Household final consumption"
+    },
+    {
+      "dataset": "nama_10_gdp",
+      "key": "A.CP_MEUR.P51G.{geo}",
+      "unit": "million EUR",
+      "indicator": "P51G",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Gross fixed capital formation"
+    },
+    {
+      "dataset": "namq_10_gdp",
+      "key": "Q.CP_MEUR.SCA.B1GQ.{geo}",
+      "unit": "million EUR",
+      "indicator": "B1GQ",
+      "freq": "Q",
+      "kind": "flow",
+      "title": "GDP quarterly current prices"
+    },
+    {
+      "dataset": "gov_10dd_edpt1",
+      "key": "A.PC_GDP.S13.GD.{geo}",
+      "unit": "%",
+      "indicator": "GD",
+      "freq": "A",
+      "kind": "ratio",
+      "title": "Government debt % GDP"
+    },
+    {
+      "dataset": "gov_10a_main",
+      "key": "A.MIO_EUR.S13.B9.{geo}",
+      "unit": "million EUR",
+      "indicator": "B9",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Net lending/borrowing general government"
+    },
+    {
+      "dataset": "une_rt_a",
+      "key": "A.Y15-74.PC_ACT.T.{geo}",
+      "unit": "%",
+      "indicator": "UNE_Y15_74",
+      "freq": "A",
+      "kind": "ratio",
+      "title": "Unemployment rate"
+    },
+    {
+      "dataset": "demo_pjan",
+      "key": "A.NR.TOTAL.T.{geo}",
+      "unit": "persons",
+      "indicator": "POP",
+      "freq": "A",
+      "kind": "stock",
+      "title": "Population 1 January"
+    },
+    {
+      "dataset": "prc_hicp_aind",
+      "key": "A.INX_A_AVG.CP00.{geo}",
+      "unit": "index",
+      "indicator": "HICP",
+      "freq": "A",
+      "kind": "index",
+      "title": "HICP annual average index"
+    },
+    {
+      "dataset": "namq_10_fcs",
+      "key": "Q.CP_MEUR.SCA.P31_S14.{geo}",
+      "unit": "million EUR",
+      "indicator": "P31_S14",
+      "freq": "Q",
+      "kind": "flow",
+      "title": "Household consumption quarterly"
+    }
+  ]
+}
