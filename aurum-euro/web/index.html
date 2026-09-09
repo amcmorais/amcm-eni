@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Aurum Euro — public data repository</title>
+  <link rel="stylesheet" href="/static/styles.css"/>
+</head>
+<body>
+<header>
+  <strong>€Au</strong>
+  <nav>
+    <a href="/">Data</a>
+    <a href="#explore">Explore</a>
+    <a href="#download">Download</a>
+    <a href="/static/methodology.html">Methodology</a>
+    <a href="/static/provenance.html">Provenance</a>
+    <a href="/static/about.html">About</a>
+  </nav>
+</header>
+<main>
+  <h1>Aurum Euro public data repository</h1>
+  <p class="mut">Original Eurostat / STOXX observations preserved. Historically aligned €Au equivalents. 100 €Au = 1 troy oz Au 999.9. The engine does not assert growth or welfare.</p>
+  <div class="health" id="health"></div>
+  <h2>Browser</h2>
+  <p>
+    Dataset <select id="ds"></select>
+    Output
+    <select id="unit"><option>both</option><option>EUR</option><option>au</option></select>
+    <button id="go">Load</button>
+    <a id="csv" href="#">CSV</a>
+    <a id="json" href="#">JSON</a>
+  </p>
+  <table>
+    <thead><tr><th>Period</th><th>Source</th><th>Unit</th><th>Gold €/oz</th><th>Alignment</th><th>€Au</th><th>€Au unit</th></tr></thead>
+    <tbody id="tb"><tr><td colspan="7" class="mut">Load a dataset.</td></tr></tbody>
+  </table>
+</main>
+<script src="/static/app.js"></script>
+</body>
+</html>

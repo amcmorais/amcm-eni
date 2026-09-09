@@ -13,3 +13,7 @@
 ## Scope
 
 Registry for the operator entity relative to the Fog Node and the laboratory. Protocol code lives under **StrataMesh-Laboratory**.
+
+## Aurum Euro repository
+
+Code: [`aurum-euro/`](aurum-euro/). Public path: https://eni.calhegasmorais.pt/aurum-euro

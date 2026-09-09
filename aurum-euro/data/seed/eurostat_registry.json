@@ -1,0 +1,6 @@
+{
+  "datasets": [
+    {"id": "nama_10_gdp", "title": "GDP and main components (output, expenditure and income)", "frequency": "A"},
+    {"id": "prc_hicp_aind", "title": "HICP annual", "frequency": "A"}
+  ]
+}

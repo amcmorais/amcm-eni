@@ -1,0 +1,5 @@
+aurum-euro/data/aurum.sqlite
+aurum-euro/data/raw/
+__pycache__/
+*.pyc
+.venv/
