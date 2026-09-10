@@ -1,0 +1,167 @@
+{
+  "title": "Euro-area regulated markets \u2014 primary listing venues",
+  "not": "This register is not a STOXX index and does not use STOXX files, names or membership.",
+  "n": 20,
+  "venues": [
+    {
+      "geo": "AT",
+      "market": "Wiener B\u00f6rse",
+      "mic": "XWBO",
+      "operator": "Wiener B\u00f6rse AG",
+      "list": "https://www.wienerborse.at/en/listing/shares/",
+      "oam": "https://issuer.wienerborse.at/"
+    },
+    {
+      "geo": "BE",
+      "market": "Euronext Brussels",
+      "mic": "XBRU",
+      "operator": "Euronext",
+      "list": "https://live.euronext.com/en/markets/brussels/equities/list",
+      "oam": "https://www.fsma.be/"
+    },
+    {
+      "geo": "CY",
+      "market": "Cyprus Stock Exchange",
+      "mic": "XCYS",
+      "operator": "Cyprus Stock Exchange",
+      "list": "https://www.cse.com.cy/",
+      "oam": "https://www.cysec.gov.cy/"
+    },
+    {
+      "geo": "DE",
+      "market": "Frankfurter Wertpapierb\u00f6rse / Xetra",
+      "mic": "XETR",
+      "operator": "Deutsche B\u00f6rse AG",
+      "list": "https://www.xetra.com/xetra-en/instruments",
+      "oam": "https://www.bundesanzeiger.de/"
+    },
+    {
+      "geo": "EE",
+      "market": "Nasdaq Tallinn",
+      "mic": "XTAL",
+      "operator": "Nasdaq Baltic",
+      "list": "https://nasdaqbaltic.com/statistics/en/shares",
+      "oam": "https://www.fi.ee/"
+    },
+    {
+      "geo": "ES",
+      "market": "Bolsa de Madrid / BME",
+      "mic": "XMAD",
+      "operator": "Bolsas y Mercados Espa\u00f1oles",
+      "list": "https://www.bolsasymercados.es/bme-exchange/en/Prices-and-Markets/Shares",
+      "oam": "https://www.cnmv.es/"
+    },
+    {
+      "geo": "FI",
+      "market": "Nasdaq Helsinki",
+      "mic": "XHEL",
+      "operator": "Nasdaq Helsinki",
+      "list": "https://www.nasdaqomxnordic.com/shares/listed-companies/helsinki",
+      "oam": "https://www.finanssivalvonta.fi/"
+    },
+    {
+      "geo": "FR",
+      "market": "Euronext Paris",
+      "mic": "XPAR",
+      "operator": "Euronext",
+      "list": "https://live.euronext.com/en/markets/paris/equities/list",
+      "oam": "https://www.info-financiere.fr/"
+    },
+    {
+      "geo": "GR",
+      "market": "Athens Exchange",
+      "mic": "XATH",
+      "operator": "Hellenic Exchanges",
+      "list": "https://www.athexgroup.gr/en/market-data/securities",
+      "oam": "https://www.hcmc.gr/"
+    },
+    {
+      "geo": "HR",
+      "market": "Zagreb Stock Exchange",
+      "mic": "XZAG",
+      "operator": "Zagreba\u010dka burza",
+      "list": "https://zse.hr/en",
+      "oam": "https://www.hanfa.hr/"
+    },
+    {
+      "geo": "IE",
+      "market": "Euronext Dublin",
+      "mic": "XDUB",
+      "operator": "Euronext",
+      "list": "https://live.euronext.com/en/markets/dublin/equities/list",
+      "oam": "https://www.centralbank.ie/"
+    },
+    {
+      "geo": "IT",
+      "market": "Euronext Milan",
+      "mic": "MTAA",
+      "operator": "Euronext",
+      "list": "https://live.euronext.com/en/markets/milan/equities/list",
+      "oam": "https://www.consob.it/"
+    },
+    {
+      "geo": "LT",
+      "market": "Nasdaq Vilnius",
+      "mic": "XLIT",
+      "operator": "Nasdaq Baltic",
+      "list": "https://nasdaqbaltic.com/statistics/en/shares",
+      "oam": "https://www.lb.lt/"
+    },
+    {
+      "geo": "LU",
+      "market": "Luxembourg Stock Exchange",
+      "mic": "XLUX",
+      "operator": "Bourse de Luxembourg",
+      "list": "https://www.luxse.com/",
+      "oam": "https://www.luxse.com/oam"
+    },
+    {
+      "geo": "LV",
+      "market": "Nasdaq Riga",
+      "mic": "XRIS",
+      "operator": "Nasdaq Baltic",
+      "list": "https://nasdaqbaltic.com/statistics/en/shares",
+      "oam": "https://www.fktk.lv/"
+    },
+    {
+      "geo": "MT",
+      "market": "Malta Stock Exchange",
+      "mic": "XMAL",
+      "operator": "Malta Stock Exchange",
+      "list": "https://www.borzamalta.com.mt/",
+      "oam": "https://www.mfsa.mt/"
+    },
+    {
+      "geo": "NL",
+      "market": "Euronext Amsterdam",
+      "mic": "XAMS",
+      "operator": "Euronext",
+      "list": "https://live.euronext.com/en/markets/amsterdam/equities/list",
+      "oam": "https://www.afm.nl/"
+    },
+    {
+      "geo": "PT",
+      "market": "Euronext Lisbon",
+      "mic": "XLIS",
+      "operator": "Euronext",
+      "list": "https://live.euronext.com/en/markets/lisbon/equities/list",
+      "oam": "https://www.cmvm.pt/"
+    },
+    {
+      "geo": "SI",
+      "market": "Ljubljana Stock Exchange",
+      "mic": "XLJU",
+      "operator": "Ljubljanska borza",
+      "list": "https://ljse.si/en",
+      "oam": "https://www.a-tvp.si/"
+    },
+    {
+      "geo": "SK",
+      "market": "Bratislava Stock Exchange",
+      "mic": "XBRA",
+      "operator": "Burza cenn\u00fdch papierov v Bratislave",
+      "list": "https://www.bsse.sk/",
+      "oam": "https://www.nbs.sk/"
+    }
+  ]
+}
