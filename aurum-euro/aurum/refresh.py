@@ -116,7 +116,7 @@ def refresh_stocks(per_geo: int = 5) -> dict:
         "n_filings_indexed": len(filings),
         "n_eau_observations": len(observations),
         "eau_years": sorted({o["period"][:4] for o in observations}),
-        "note": "Automated ESEF refresh. Unit €Au. Euro is provenance. Not prices. Not STOXX.",
+        "note": "Automated ESEF refresh. Unit €Au. Euro is provenance. Not prices. ",
         "issuers": issuer_rows,
         "observations": observations,
     }
@@ -131,3 +131,71 @@ def refresh_stocks(per_geo: int = 5) -> dict:
         "eau_years": pack["eau_years"],
         "generated_at": pack["generated_at"],
     }
+
+
+def refresh_eurostat() -> dict:
+    from .store import connect, init_db
+    from .pipeline import ingest_gold, ingest_phase2, ingest_nama_gdp
+    from .scale import RULE
+    con = connect(); init_db(con)
+    ingest_gold(con)
+    try:
+        p2 = ingest_phase2(con)
+    except Exception as e:
+        p2 = {"ok": False, "err": str(e)[:120]}
+    try:
+        n1 = ingest_nama_gdp(con)
+    except Exception as e:
+        n1 = {"ok": False, "err": str(e)[:120]}
+    gold = [dict(r) for r in con.execute(
+        "select observation_date, frequency, price_eur_per_troy_oz, methodology, source from gold_prices order by 1")]
+    rows = []
+    q = """
+    SELECT v.dataset_id as dataset, r.entity_id, r.indicator_id, r.reference_period AS period,
+           r.value AS source_value, r.unit AS source_unit,
+           a.gold_price, a.gold_alignment_method,
+           a.derived_value AS au_value, a.derived_unit AS au_unit
+      FROM au_observations a
+      JOIN observations_normalized n ON n.id=a.normalized_id
+      JOIN observations_raw r ON r.id=n.raw_id
+      JOIN dataset_versions v ON v.id=r.dataset_version_id
+     ORDER BY v.dataset_id, r.entity_id, r.indicator_id, r.reference_period
+    """
+    obs = {}
+    for r in con.execute(q):
+        d = dict(r)
+        key = f"{d['dataset']}|{d['entity_id']}|{d['indicator_id']}"
+        obs.setdefault(key, []).append({
+            "period": d["period"], "source_value": d["source_value"], "source_unit": d["source_unit"],
+            "gold_price": d["gold_price"], "gold_alignment_method": d["gold_alignment_method"],
+            "au_value": d["au_value"], "au_unit": "€Au",
+        })
+    catalog = [{"id": k} for k in sorted(obs)]
+    pack = {
+        "publication_unit": "€Au",
+        "scale": "long",
+        "scale_rule": RULE,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "gold": gold,
+        "observations": obs,
+        "series": sorted(obs),
+        "catalog": catalog,
+        "status": {
+            "gold_rows": len(gold),
+            "au_observations": sum(len(v) for v in obs.values()),
+            "source": "Eurostat SDMX automated refresh",
+        },
+        "definition": {
+            "equation": "100 €Au = 1 troy oz Au 999.9",
+            "formula": TRANSFORMATION_FORMULA,
+        },
+    }
+    dest = ROOT / "web" / "accounts-snapshot.json"
+    dest.write_text(json.dumps(pack, separators=(",", ":")))
+    return {"ok": True, "path": str(dest), "au_observations": pack["status"]["au_observations"], "series": len(obs), "phase2": p2, "nama": n1}
+
+
+def refresh_all() -> dict:
+    euro = refresh_eurostat()
+    stocks = refresh_stocks()
+    return {"publication_unit": "€Au", "scale": "long", "eurostat": euro, "esef": stocks}

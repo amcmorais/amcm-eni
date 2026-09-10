@@ -1,5 +1,5 @@
 -- European listed issuers on euro-area regulated markets.
--- Not a STOXX product. Prices stay empty until a venue republication right exists.
+-- Prices stay empty until a venue republication right exists.
 CREATE TABLE IF NOT EXISTS venues (
   mic TEXT PRIMARY KEY,
   geo TEXT NOT NULL,

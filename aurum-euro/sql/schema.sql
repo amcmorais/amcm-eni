@@ -4,7 +4,7 @@
 CREATE TABLE IF NOT EXISTS sources (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
-  kind TEXT NOT NULL, -- eurostat | stoxx | gold
+  kind TEXT NOT NULL, -- eurostat | esef | gold
   homepage TEXT,
   license_note TEXT
 );
@@ -155,5 +155,4 @@ CREATE TABLE IF NOT EXISTS validation_results (
 
 INSERT OR IGNORE INTO sources(id,name,kind,homepage,license_note) VALUES
  ('eurostat','Eurostat','eurostat','https://ec.europa.eu/eurostat','Eurostat reuse policy'),
- ('stoxx','STOXX','stoxx','https://www.stoxx.com','Licensed vendor — connector only publishes if licence permits'),
  ('gold','Gold EUR/oz','gold','https://data.ecb.europa.eu','ECB SDW XAU/EUR where available');

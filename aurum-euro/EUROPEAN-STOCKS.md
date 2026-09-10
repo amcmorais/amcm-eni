@@ -2,7 +2,7 @@
 
 A register of companies admitted to the **primary regulated market** of each euro-area State.
 
-This is not a STOXX product. It does not use STOXX files, names, membership, weights or review calendars.
+This is It does not use files, names, membership, weights or review calendars.
 
 ## Sources
 
@@ -17,4 +17,4 @@ The twenty primary venues and their official list and OAM addresses. Issuer rows
 
 ## What will never be published under this title
 
-EURO STOXX 50, STOXX Europe 600, or any series described as equivalent to them.
+EURO 50, Europe 600, or any series described as equivalent to them.

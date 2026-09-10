@@ -2,7 +2,7 @@
 
 Production path: https://eni.calhegasmorais.pt/aurum-euro
 
-Primary product: automated acquisition, preservation, transformation and publication of Eurostat and STOXX data as historically aligned €Au series.
+Primary product: automated acquisition, preservation, transformation and publication of Eurostat data as historically aligned €Au series.
 
 Covenant + Deflator Thesis are secondary. They do not drive the transform.
 
@@ -30,7 +30,7 @@ Source rows stay. €Au rows are derived and provenanced.
 - GET /api/v1/au/nama_10_gdp
 - browser /
 
-STOXX fetch is licence-gated; constituent `valid_from`/`valid_to` is in sql/schema.sql.
+fetch is licence-gated; constituent `valid_from`/`valid_to` is in sql/schema.sql.
 
 ## Laws
 
@@ -39,3 +39,8 @@ STOXX fetch is licence-gated; constituent `valid_from`/`valid_to` is in sql/sche
 3. Gold alignment is explicit.
 4. Units are dimensional.
 5. The engine does not encode the Deflator Thesis.
+
+
+## Long scale
+
+Published €Au magnitudes use the long scale: million = 10^6; milliard = 10^9; billion = 10^12 = M^2; trillion = 10^18 = M^3. The short-scale assignment of billion to 10^9 is not used.

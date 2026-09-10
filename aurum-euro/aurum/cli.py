@@ -2,7 +2,7 @@ from __future__ import annotations
 import argparse, json
 from .store import connect, init_db
 from .pipeline import rebuild, ingest_gold, ingest_nama_gdp
-from .refresh import refresh_stocks
+from .refresh import refresh_all
 
 
 def main(argv=None) -> int:
@@ -23,7 +23,7 @@ def main(argv=None) -> int:
     if args.cmd == "rebuild":
         print(json.dumps(rebuild(), indent=2)); return 0
     if args.cmd == "refresh":
-        print(json.dumps(refresh_stocks(), indent=2)); return 0
+        print(json.dumps(refresh_all(), indent=2)); return 0
     if args.cmd == "ingest-gold":
         con = connect(); init_db(con); n=ingest_gold(con); print("gold", n); return 0
     if args.cmd == "ingest-eurostat":

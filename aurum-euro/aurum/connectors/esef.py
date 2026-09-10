@@ -1,7 +1,7 @@
 """ESEF packages from filings.xbrl.org — current and historical.
 
 Official reports of issuers on EU regulated markets. Not exchange prices.
-Not a STOXX product. Published unit after transform is €Au.
+Published unit after transform is €Au.
 """
 from __future__ import annotations
 import json

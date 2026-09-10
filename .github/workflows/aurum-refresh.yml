@@ -21,7 +21,7 @@ jobs:
         run: |
           git config user.email "grok@calhegasmorais.pt"
           git config user.name "Aurum Euro refresh"
-          git add aurum-euro/web/stocks-snapshot.json
+          git add aurum-euro/web/stocks-snapshot.json aurum-euro/web/accounts-snapshot.json
           git diff --cached --quiet && echo "no change" && exit 0
           git commit -m "chore(aurum-euro): automated €Au snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
           git push
