@@ -168,8 +168,10 @@ def refresh_eurostat() -> dict:
         obs.setdefault(key, []).append({
             "period": d["period"], "source_value": d["source_value"], "source_unit": d["source_unit"],
             "gold_price": d["gold_price"], "gold_alignment_method": d["gold_alignment_method"],
-            "au_value": d["au_value"], "au_unit": "€Au",
+            "au_value": d["au_value"], "au_unit": "€Au per inhabitant",
         })
+    from .percapita import apply as apply_per_capita
+    apply_per_capita(obs)
     GEO = {
         "EA20":"Euro area","EU27_2020":"European Union",
         "AT":"Austria","BE":"Belgium","CY":"Cyprus","DE":"Germany","EE":"Estonia",

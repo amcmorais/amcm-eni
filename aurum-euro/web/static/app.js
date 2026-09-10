@@ -126,7 +126,7 @@ function draw(){
   $("#tb").innerHTML = periods.length ? periods.map(p => {
     const cells = indicators.map(i => {
       const o = byPeriod[p][i.indicator_id];
-      return `<td class="num">${o ? formatAu(o.au_value) : "—"}</td>`;
+      return `<td class="num">${o ? formatAu(o.au_per_capita != null ? o.au_per_capita : o.au_value) : "—"}</td>`;
     }).join("");
     return `<tr><td>${p}</td>${cells}</tr>`;
   }).join("") : `<tr><td colspan="${1+indicators.length}">No Aurum Euro observations are published for this selection.</td></tr>`;
