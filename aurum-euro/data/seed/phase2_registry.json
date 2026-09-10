@@ -1,16 +1,28 @@
 {
-  "note": "Official Eurostat SDMX 2.1 keys. Full history, filtered series \u2014 not webpage scrape.",
+  "note": "Official Eurostat SDMX 2.1 keys. Monetary series only. Full history.",
   "geos": [
     "EA20",
     "EU27_2020",
-    "DE",
-    "FR",
-    "IT",
-    "ES",
-    "PT",
-    "NL",
     "AT",
-    "BE"
+    "BE",
+    "CY",
+    "DE",
+    "EE",
+    "ES",
+    "FI",
+    "FR",
+    "GR",
+    "HR",
+    "IE",
+    "IT",
+    "LT",
+    "LU",
+    "LV",
+    "MT",
+    "NL",
+    "PT",
+    "SI",
+    "SK"
   ],
   "series": [
     {
@@ -20,7 +32,16 @@
       "indicator": "B1GQ",
       "freq": "A",
       "kind": "flow",
-      "title": "GDP current prices"
+      "title": "Gross domestic product"
+    },
+    {
+      "dataset": "nama_10_gdp",
+      "key": "A.CP_MEUR.P3.{geo}",
+      "unit": "million EUR",
+      "indicator": "P3",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Final consumption expenditure"
     },
     {
       "dataset": "nama_10_gdp",
@@ -33,6 +54,15 @@
     },
     {
       "dataset": "nama_10_gdp",
+      "key": "A.CP_MEUR.P31_S13.{geo}",
+      "unit": "million EUR",
+      "indicator": "P31_S13",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Government final consumption"
+    },
+    {
+      "dataset": "nama_10_gdp",
       "key": "A.CP_MEUR.P51G.{geo}",
       "unit": "million EUR",
       "indicator": "P51G",
@@ -41,58 +71,76 @@
       "title": "Gross fixed capital formation"
     },
     {
+      "dataset": "nama_10_gdp",
+      "key": "A.CP_MEUR.P52.{geo}",
+      "unit": "million EUR",
+      "indicator": "P52",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Changes in inventories"
+    },
+    {
+      "dataset": "nama_10_gdp",
+      "key": "A.CP_MEUR.P6.{geo}",
+      "unit": "million EUR",
+      "indicator": "P6",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Exports of goods and services"
+    },
+    {
+      "dataset": "nama_10_gdp",
+      "key": "A.CP_MEUR.P7.{geo}",
+      "unit": "million EUR",
+      "indicator": "P7",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Imports of goods and services"
+    },
+    {
+      "dataset": "nama_10_gdp",
+      "key": "A.CP_MEUR.B11.{geo}",
+      "unit": "million EUR",
+      "indicator": "B11",
+      "freq": "A",
+      "kind": "flow",
+      "title": "External balance of goods and services"
+    },
+    {
+      "dataset": "nama_10_gdp",
+      "key": "A.CP_MEUR.D1.{geo}",
+      "unit": "million EUR",
+      "indicator": "D1",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Compensation of employees"
+    },
+    {
+      "dataset": "nama_10_gdp",
+      "key": "A.CP_MEUR.B2A3G.{geo}",
+      "unit": "million EUR",
+      "indicator": "B2A3G",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Gross operating surplus and mixed income"
+    },
+    {
       "dataset": "namq_10_gdp",
       "key": "Q.CP_MEUR.SCA.B1GQ.{geo}",
       "unit": "million EUR",
       "indicator": "B1GQ",
       "freq": "Q",
       "kind": "flow",
-      "title": "GDP quarterly current prices"
+      "title": "GDP quarterly"
     },
     {
-      "dataset": "gov_10dd_edpt1",
-      "key": "A.PC_GDP.S13.GD.{geo}",
-      "unit": "%",
-      "indicator": "GD",
-      "freq": "A",
-      "kind": "ratio",
-      "title": "Government debt % GDP"
-    },
-    {
-      "dataset": "gov_10a_main",
-      "key": "A.MIO_EUR.S13.B9.{geo}",
+      "dataset": "namq_10_gdp",
+      "key": "Q.CP_MEUR.SCA.P31_S14.{geo}",
       "unit": "million EUR",
-      "indicator": "B9",
-      "freq": "A",
+      "indicator": "P31_S14",
+      "freq": "Q",
       "kind": "flow",
-      "title": "Net lending/borrowing general government"
-    },
-    {
-      "dataset": "une_rt_a",
-      "key": "A.Y15-74.PC_ACT.T.{geo}",
-      "unit": "%",
-      "indicator": "UNE_Y15_74",
-      "freq": "A",
-      "kind": "ratio",
-      "title": "Unemployment rate"
-    },
-    {
-      "dataset": "demo_pjan",
-      "key": "A.NR.TOTAL.T.{geo}",
-      "unit": "persons",
-      "indicator": "POP",
-      "freq": "A",
-      "kind": "stock",
-      "title": "Population 1 January"
-    },
-    {
-      "dataset": "prc_hicp_aind",
-      "key": "A.INX_A_AVG.CP00.{geo}",
-      "unit": "index",
-      "indicator": "HICP",
-      "freq": "A",
-      "kind": "index",
-      "title": "HICP annual average index"
+      "title": "Household consumption quarterly"
     },
     {
       "dataset": "namq_10_fcs",
@@ -101,7 +149,34 @@
       "indicator": "P31_S14",
       "freq": "Q",
       "kind": "flow",
-      "title": "Household consumption quarterly"
+      "title": "Household consumption quarterly (fcs)"
+    },
+    {
+      "dataset": "gov_10a_main",
+      "key": "A.MIO_EUR.S13.B9.{geo}",
+      "unit": "million EUR",
+      "indicator": "B9",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Net lending or borrowing of general government"
+    },
+    {
+      "dataset": "gov_10a_main",
+      "key": "A.MIO_EUR.S13.TE.{geo}",
+      "unit": "million EUR",
+      "indicator": "TE",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Total general government expenditure"
+    },
+    {
+      "dataset": "gov_10a_main",
+      "key": "A.MIO_EUR.S13.TR.{geo}",
+      "unit": "million EUR",
+      "indicator": "TR",
+      "freq": "A",
+      "kind": "flow",
+      "title": "Total general government revenue"
     }
   ]
 }

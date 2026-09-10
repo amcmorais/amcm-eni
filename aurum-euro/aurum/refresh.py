@@ -170,7 +170,42 @@ def refresh_eurostat() -> dict:
             "gold_price": d["gold_price"], "gold_alignment_method": d["gold_alignment_method"],
             "au_value": d["au_value"], "au_unit": "€Au",
         })
-    catalog = [{"id": k} for k in sorted(obs)]
+    GEO = {
+        "EA20":"Euro area","EU27_2020":"European Union",
+        "AT":"Austria","BE":"Belgium","CY":"Cyprus","DE":"Germany","EE":"Estonia",
+        "ES":"Spain","FI":"Finland","FR":"France","GR":"Greece","HR":"Croatia",
+        "IE":"Ireland","IT":"Italy","LT":"Lithuania","LU":"Luxembourg","LV":"Latvia",
+        "MT":"Malta","NL":"Netherlands","PT":"Portugal","SI":"Slovenia","SK":"Slovakia",
+    }
+    IND = {
+        "B1GQ":"Gross domestic product","P3":"Final consumption",
+        "P31_S14":"Household final consumption","P31_S13":"Government final consumption",
+        "P51G":"Gross fixed capital formation","P52":"Changes in inventories",
+        "P6":"Exports","P7":"Imports","B11":"External balance",
+        "D1":"Compensation of employees","B2A3G":"Gross operating surplus",
+        "B9":"Net lending or borrowing","TE":"Government expenditure","TR":"Government revenue",
+    }
+    DS = {
+        "nama_10_gdp":"National accounts — GDP and main aggregates",
+        "namq_10_gdp":"National accounts — quarterly GDP",
+        "namq_10_fcs":"National accounts — quarterly consumption",
+        "gov_10a_main":"Government main aggregates",
+    }
+    catalog = []
+    for k in sorted(obs):
+        parts = k.split("|")
+        ds = parts[0] if parts else ""
+        geo = (parts[1] if len(parts)>1 else "").replace("geo:","")
+        ind = parts[2] if len(parts)>2 else ""
+        catalog.append({
+            "id": k,
+            "dataset_id": ds,
+            "dataset_title": DS.get(ds, ds),
+            "geography_id": geo,
+            "geography": GEO.get(geo, geo),
+            "indicator_id": ind,
+            "indicator": IND.get(ind, ind),
+        })
     pack = {
         "publication_unit": "€Au",
         "scale": "long",
