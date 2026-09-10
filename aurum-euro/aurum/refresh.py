@@ -27,14 +27,17 @@ def to_au(eur: float, price: float) -> float:
     return eur * 100.0 / price
 
 
-def select_extract_batch(filings: list[dict], per_geo: int = 5) -> list[dict]:
+def select_extract_batch(filings: list[dict], per_lei: int = 2, max_leis: int = 400) -> list[dict]:
+    """Latest filing plus the previous period for as many issuers as the run can ingest."""
     by = defaultdict(list)
     for row in filings:
-        by[row["geo"]].append(row)
+        by[row["lei"]].append(row)
+    # Prefer issuers whose latest period is most recent.
+    order = sorted(by, key=lambda lei: max(r["period"] for r in by[lei]), reverse=True)
     batch, seen = [], set()
-    for items in by.values():
-        items = sorted(items, key=lambda x: x["period"])
-        for row in items[:2] + items[-per_geo:]:
+    for lei in order[:max_leis]:
+        items = sorted(by[lei], key=lambda x: x["period"], reverse=True)[:per_lei]
+        for row in items:
             key = (row["lei"], row["period"])
             if key in seen:
                 continue
@@ -43,19 +46,73 @@ def select_extract_batch(filings: list[dict], per_geo: int = 5) -> list[dict]:
     return batch
 
 
-def refresh_stocks(per_geo: int = 5) -> dict:
+def _lag_mark(period: str, now_year: int | None = None) -> str:
+    try:
+        year = int(str(period)[:4])
+    except (TypeError, ValueError):
+        return ""
+    lag = (now_year or datetime.now(timezone.utc).year) - year
+    if lag <= 0:
+        return ""
+    return "*" * lag
+
+
+def _metric(obs: dict) -> float | None:
+    for k in ("equity_au", "assets_au", "revenue_au"):
+        if obs.get(k) is not None:
+            return float(obs[k])
+    return None
+
+
+def attach_yoy(observations: list[dict]) -> None:
+    by = defaultdict(list)
+    for obs in observations:
+        by[obs["lei"]].append(obs)
+    now_year = datetime.now(timezone.utc).year
+    for lei, items in by.items():
+        items.sort(key=lambda o: o["period"])
+        prev = None
+        for obs in items:
+            obs["lag_years"] = max(0, now_year - int(str(obs["period"])[:4]))
+            obs["staleness"] = _lag_mark(obs["period"], now_year)
+            cur = _metric(obs)
+            if prev is not None and cur is not None:
+                base = _metric(prev)
+                if base not in (None, 0):
+                    obs["yoy_pct"] = round((cur - base) / abs(base) * 100.0, 1)
+                    obs["yoy_basis"] = prev["period"]
+            prev = obs
+
+
+def refresh_stocks(per_geo: int = 5, max_new_extracts: int = 280) -> dict:
     gold = gold_by_year()
     conn = EsefConnector()
     filings = conn.index()
-    batch = select_extract_batch(filings, per_geo=per_geo)
+    prior = {}
+    if OUT.is_file():
+        try:
+            old = json.loads(OUT.read_text())
+            for obs in old.get("observations") or []:
+                prior[(obs.get("lei"), obs.get("period"))] = obs
+        except Exception:
+            prior = {}
+    batch = select_extract_batch(filings, per_lei=2, max_leis=500)
     observations = []
+    extracted = 0
     for row in batch:
+        cached = prior.get((row["lei"], row["period"]))
+        if cached and _metric(cached) is not None:
+            observations.append(dict(cached))
+            continue
+        if extracted >= max_new_extracts:
+            continue
         try:
             facts = conn.extract_facts(row["json_url"])
+            extracted += 1
         except Exception:
             continue
         year = row["period"][:4]
-        px = gold.get(year) or gold.get("2024")
+        px = gold.get(year) or gold.get("2024") or gold.get("2025")
         if not facts or not px:
             continue
         obs = {
@@ -79,6 +136,12 @@ def refresh_stocks(per_geo: int = 5) -> dict:
             obs["revenue_au"] = round(to_au(facts["Revenue"], px), 4)
         if any(k in obs for k in ("equity_au", "assets_au", "revenue_au")):
             observations.append(obs)
+    # Keep historical extracts that were not in this batch.
+    have = {(o["lei"], o["period"]) for o in observations}
+    for key, obs in prior.items():
+        if key not in have and _metric(obs) is not None:
+            observations.append(dict(obs))
+    attach_yoy(observations)
 
     issuers = {}
     for row in filings:
@@ -103,7 +166,8 @@ def refresh_stocks(per_geo: int = 5) -> dict:
         rec["source"] = "ESEF"
         if lei in latest:
             L = latest[lei]
-            for k in ("equity_au", "equity_eur_source", "assets_au", "revenue_au", "period"):
+            for k in ("equity_au", "equity_eur_source", "assets_au", "revenue_au", "period",
+                      "yoy_pct", "yoy_basis", "staleness", "lag_years"):
                 if k in L:
                     rec[k] = L[k]
         issuer_rows.append(rec)
@@ -137,6 +201,18 @@ def refresh_stocks(per_geo: int = 5) -> dict:
         "note": "Automated ESEF refresh. Unit €Au. Euro is provenance. Not prices. ",
         "issuers": issuer_rows,
         "observations": observations,
+        "ranked_latest": sorted(
+            [r for r in issuer_rows if _metric(r) is not None],
+            key=_rk, reverse=True,
+        ),
+        "sort": "equity_au_desc",
+        "automation": "github-action incremental ESEF",
+        "annotation": (
+            "Yearly variation is the change in the published €Au magnitude "
+            "(equity, else assets, else revenue) versus the previous filing of the same LEI. "
+            "Asterisks mark how many calendar years the latest filing lags the current year: "
+            "* one year, ** two years, *** three years, and so on."
+        ),
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(pack, separators=(",", ":")))
