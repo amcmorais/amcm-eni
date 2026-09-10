@@ -117,7 +117,13 @@ function draw(){
       byPeriod[o.period][r.indicator_id] = o;
     });
   });
-  const periods = Object.keys(byPeriod).sort();
+  const periods = Object.keys(byPeriod).sort((a,b)=>{
+    const ia = indicators[0] && byPeriod[a][indicators[0].indicator_id];
+    const ib = indicators[0] && byPeriod[b][indicators[0].indicator_id];
+    const va = ia && (ia.au_per_capita != null ? ia.au_per_capita : ia.au_value);
+    const vb = ib && (ib.au_per_capita != null ? ib.au_per_capita : ib.au_value);
+    return (Number(vb)||0) - (Number(va)||0);
+  });
   const thead = document.querySelector("#wide-head") || document.querySelector("thead tr");
   if (thead) {
     thead.innerHTML = "<th>Reference period</th>" + indicators.map(i =>

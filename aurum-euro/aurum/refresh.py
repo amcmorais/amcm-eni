@@ -108,6 +108,24 @@ def refresh_stocks(per_geo: int = 5) -> dict:
                     rec[k] = L[k]
         issuer_rows.append(rec)
 
+    names = {}
+    nf = ROOT / "data" / "seed" / "lei_names.json"
+    if nf.is_file():
+        import json as _j
+        names = _j.loads(nf.read_text())
+    def _rk(o):
+        for k in ("equity_au","assets_au","revenue_au"):
+            if o.get(k) is not None:
+                return float(o[k])
+        return float("-inf")
+    for o in observations:
+        o["name"] = names.get(o["lei"])
+        o["lei_url"] = "https://search.gleif.org/#/record/" + o["lei"]
+    observations.sort(key=_rk, reverse=True)
+    for rec in issuer_rows:
+        rec["name"] = names.get(rec["lei"])
+        rec["lei_url"] = "https://search.gleif.org/#/record/" + rec["lei"]
+
     pack = {
         "publication_unit": "€Au",
         "coverage": "current_and_historical",
