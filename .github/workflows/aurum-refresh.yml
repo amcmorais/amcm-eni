@@ -1,0 +1,27 @@
+name: aurum-euro-refresh
+on:
+  schedule:
+    - cron: "20 5 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Refresh official sources into €Au snapshot
+        working-directory: aurum-euro
+        run: PYTHONPATH=. python3 -m aurum refresh
+      - name: Publish snapshot on main
+        run: |
+          git config user.email "grok@calhegasmorais.pt"
+          git config user.name "Aurum Euro refresh"
+          git add aurum-euro/web/stocks-snapshot.json
+          git diff --cached --quiet && echo "no change" && exit 0
+          git commit -m "chore(aurum-euro): automated €Au snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push

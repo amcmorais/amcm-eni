@@ -2,6 +2,7 @@ from __future__ import annotations
 import argparse, json
 from .store import connect, init_db
 from .pipeline import rebuild, ingest_gold, ingest_nama_gdp
+from .refresh import refresh_stocks
 
 
 def main(argv=None) -> int:
@@ -9,6 +10,7 @@ def main(argv=None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("init")
     sub.add_parser("rebuild")
+    sub.add_parser("refresh")
     sub.add_parser("ingest-gold")
     g = sub.add_parser("ingest-eurostat")
     g.add_argument("--dataset", default="nama_10_gdp")
@@ -20,6 +22,8 @@ def main(argv=None) -> int:
         con = connect(); init_db(con); con.close(); print("db ready"); return 0
     if args.cmd == "rebuild":
         print(json.dumps(rebuild(), indent=2)); return 0
+    if args.cmd == "refresh":
+        print(json.dumps(refresh_stocks(), indent=2)); return 0
     if args.cmd == "ingest-gold":
         con = connect(); init_db(con); n=ingest_gold(con); print("gold", n); return 0
     if args.cmd == "ingest-eurostat":
