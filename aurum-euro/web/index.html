@@ -4,7 +4,6 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Aurum Euro Repository</title>
-  <meta name="description" content="Public repository of European statistical observations preserved in their original unit and expressed in Aurum Euro."/>
   <link rel="stylesheet" href="/aurum-euro/static/styles.css"/>
   <script type="application/ld+json" id="jsonld"></script>
 </head>
@@ -15,12 +14,13 @@
     <a href="/aurum-euro">Repository</a>
     <a href="/aurum-euro/static/methodology.html">Method</a>
     <a href="/aurum-euro/static/provenance.html">Provenance</a>
-    <a href="/aurum-euro/api/v1/health">Machine interface</a>
+    <a href="/aurum-euro/static/sources.html">Sources</a>
+    <a href="/aurum-euro/api/v1/catalog">Catalog</a>
   </nav>
 </header>
 <main>
   <h1>A public repository of European accounts in Aurum Euro</h1>
-  <p class="lead">Each figure is kept as published by the statistical authority. A second figure is computed in Aurum Euro from the fixed metallic definition and the gold price of the same period. The repository does not interpret growth, inflation, or welfare.</p>
+  <p class="lead">Each figure is kept as published by the statistical authority. A second figure is computed in Aurum Euro from the fixed metallic definition and the gold price of the same period.</p>
   <div class="stats" id="stats"></div>
   <p class="notice" id="notice"></p>
   <div class="filters">
@@ -46,12 +46,7 @@
     </table>
   </div>
   <footer>
-    <p>Definition: one hundred Aurum Euro equal one troy ounce of gold of fineness 999.9. Formula: the original euro observation multiplied by one hundred and divided by the euro price of one troy ounce in the aligned period.</p>
-    <p>Downloads for the selected series:
-      <a id="csv" href="#">comma-separated values</a> ·
-      <a id="json" href="#">JSON</a> ·
-      <a href="/aurum-euro/snapshot.json">complete snapshot</a>
-    </p>
+    <p>One hundred Aurum Euro equal one troy ounce of gold of fineness 999.9. The original observation multiplied by one hundred and divided by the aligned gold price yields the figure in Aurum Euro.</p>
   </footer>
 </main>
 <script src="/aurum-euro/static/app.js"></script>

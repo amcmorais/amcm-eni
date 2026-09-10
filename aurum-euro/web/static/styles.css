@@ -1,11 +1,10 @@
 
 :root{--paper:#f6f1e8;--ink:#241c14;--mut:#5c5348;--line:#d3c6b3;--card:#fffcf7;--gold:#7a5b28}
 *{box-sizing:border-box}
-html,body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 "Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif}
+html,body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 Palatino,"Palatino Linotype",Georgia,serif}
 header{border-bottom:1px solid var(--line);padding:1.15rem 1.5rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;align-items:baseline}
 header .mark{font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-size:.82rem}
 header nav a{color:var(--ink);margin-left:1rem;text-decoration:none;font-size:.95rem}
-header nav a:hover{text-decoration:underline}
 main{max-width:1120px;margin:0 auto;padding:1.4rem 1.3rem 3rem}
 h1{font-size:1.7rem;font-weight:600;margin:.2rem 0 .6rem}
 .lead{color:var(--mut);max-width:46rem}
@@ -15,13 +14,12 @@ h1{font-size:1.7rem;font-weight:600;margin:.2rem 0 .6rem}
 .card span{color:var(--mut);font-size:.86rem}
 .filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.6rem;margin:1rem 0}
 label{display:block;font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);margin-bottom:.2rem}
-select,button{font:inherit;width:100%;padding:.4rem .45rem;border:1px solid var(--line);background:#fff;color:var(--ink)}
-button{cursor:pointer;background:var(--ink);color:var(--paper);width:auto;padding:.4rem .9rem}
+select{font:inherit;width:100%;padding:.4rem .45rem;border:1px solid var(--line);background:#fff}
 .table-wrap{overflow:auto;border:1px solid var(--line);background:#fff}
 table{border-collapse:collapse;width:100%;font-size:.92rem}
-th,td{border-bottom:1px solid var(--line);padding:.42rem .55rem;text-align:left;vertical-align:top}
-th{background:#efe6d6;font-weight:600}
+th,td{border-bottom:1px solid var(--line);padding:.42rem .55rem;text-align:left}
+th{background:#efe6d6}
 td.num{text-align:right;font-variant-numeric:tabular-nums}
-.machine{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;color:var(--mut)}
+.machine{font-size:.85rem;color:var(--mut);margin:.4rem 0 1rem}
 footer{margin-top:1.4rem;color:var(--mut);font-size:.92rem}
 .notice{border-left:3px solid var(--gold);padding:.1rem 0 .1rem .8rem;margin:1rem 0}
